@@ -20,7 +20,7 @@ class HelloServlet {
     }
     @GetMapping
     ResponseEntity<String> prepareGreeting(@RequestParam String name,@RequestParam String lang){
-        logger.info("Got request");
+        logger.info("Got request to prepareGreeting");
         Integer langId = null;
         try {
             langId = Integer.valueOf(lang);
