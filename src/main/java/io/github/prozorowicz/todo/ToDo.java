@@ -31,4 +31,20 @@ class ToDo {
     public void setDONE(boolean DONE) {
         this.DONE = DONE;
     }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public String getTEXT() {
+        return TEXT;
+    }
+
+    public void setTEXT(String TEXT) {
+        this.TEXT = TEXT;
+    }
 }
