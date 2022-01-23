@@ -10,6 +10,7 @@ class LangDTO {
         this.CODE = lang.getCODE();
         this.FLAG = lang.getFLAG();
     }
+
     public Integer getID() {
         return ID;
     }
