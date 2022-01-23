@@ -15,11 +15,12 @@ class HelloServlet {
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
     private HelloService service;
 
-    HelloServlet(HelloService service){
-        this.service=service;
+    HelloServlet(HelloService service) {
+        this.service = service;
     }
+
     @GetMapping
-    ResponseEntity<String> prepareGreeting(@RequestParam String name,@RequestParam String lang){
+    ResponseEntity<String> prepareGreeting(@RequestParam String name, @RequestParam String lang) {
         logger.info("Got request to prepareGreeting");
         Integer langId = null;
         try {
@@ -32,6 +33,6 @@ class HelloServlet {
         if (!name.isEmpty()) {
             nameToPass = name;
         }
-        return ResponseEntity.ok(service.prepareGreeting(nameToPass,langId));
+        return ResponseEntity.ok(service.prepareGreeting(nameToPass, langId));
     }
 }

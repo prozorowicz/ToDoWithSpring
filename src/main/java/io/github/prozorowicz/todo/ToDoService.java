@@ -2,7 +2,8 @@ package io.github.prozorowicz.todo;
 
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 class ToDoService {
@@ -11,10 +12,21 @@ class ToDoService {
     public ToDoService(ToDoRepository toDoRepository) {
         this.repository = toDoRepository;
     }
-    ToDo ToggleToDo(Integer id){
-        var result = repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
-        result.setDONE(!result.getDONE());
-        repository.save(result);
-        return result;
+
+    List<ToDo> findAll() {
+        return repository.findAll();
+    }
+
+    Optional<ToDo> toggleToDo(Integer id) {
+        var toDo = repository.findById(id);
+        toDo.ifPresent(t -> {
+            t.setDONE(!t.getDONE());
+            repository.save(t);
+        });
+        return toDo;
+    }
+
+    ToDo addTodo(ToDo toDo) {
+        return repository.save(toDo);
     }
 }
