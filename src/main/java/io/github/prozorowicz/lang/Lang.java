@@ -19,9 +19,6 @@ public class Lang {
     private String FLAG;
 
 
-    /**
-     * used by Hibernate.
-     */
     @SuppressWarnings("unused")
     public Lang() {
     }

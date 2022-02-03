@@ -1,0 +1,10 @@
+spring:
+  h2.console:
+    enabled:  true
+    path:  '/console'
+  datasource.url:  'jdbc:h2:file:./todo-db'
+  jpa:
+    show-sql:  true
+    hibernate.ddl-auto:  validate
+server.error.include-binding-errors:  always
+

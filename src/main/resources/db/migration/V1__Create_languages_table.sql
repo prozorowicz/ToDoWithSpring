@@ -1,3 +1,4 @@
+drop table if exists LANGUAGES;
 create table LANGUAGES
 (
     ID          int unsigned primary key auto_increment,
