@@ -18,17 +18,22 @@ public class Task extends BaseTask{
     Task() {
     }
 
+    public Task(String description, LocalDateTime deadline){
+        this.deadline=deadline;
+        this.setDescription(description);
+    }
+
     public void updateFrom(Task source){
         super.updateFrom(source);
         deadline=source.deadline;
         group=source.group;
     }
 
-    public TaskGroup getGroup() {
+    TaskGroup getGroup() {
         return group;
     }
 
-    public void setGroup(final TaskGroup group) {
+    void setGroup(final TaskGroup group) {
         this.group = group;
     }
 
@@ -36,7 +41,7 @@ public class Task extends BaseTask{
         return deadline;
     }
 
-    public void setDeadline(final LocalDateTime deadline) {
+    void setDeadline(final LocalDateTime deadline) {
         this.deadline = deadline;
     }
 }

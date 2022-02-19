@@ -27,11 +27,7 @@ class TaskGroupController {
         logger.warn("Exposing all the taskGroups");
         return ResponseEntity.ok(repository.findAll());
     }
-    /*@GetMapping
-    ResponseEntity<List<TaskGroup>> readAllTaskGroups(Pageable page) {
-        logger.info("Custom pageable");
-        return ResponseEntity.ok(repository.findAll(page).getContent());
-    }*/
+
     @GetMapping(path = "/{id}")
     ResponseEntity<TaskGroup> readTaskGroup(@PathVariable int id) {
         logger.info("finding taskGroup by id");
