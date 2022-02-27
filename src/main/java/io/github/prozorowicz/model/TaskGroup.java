@@ -27,7 +27,7 @@ public class TaskGroup extends BaseTask {
         this.tasks = tasks;
     }
 
-    Project getProject() {
+    public Project getProject() {
         return project;
     }
 
