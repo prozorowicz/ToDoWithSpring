@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,16 +24,19 @@ class TaskController {
     TaskController(final TaskRepository repository) {
         this.repository = repository;
     }
+
     @GetMapping(params = {"!sort", "!page", "!size"})
     ResponseEntity<List<Task>> readAllTasks() {
         logger.warn("Exposing all the tasks");
         return ResponseEntity.ok(repository.findAll());
     }
+
     @GetMapping
     ResponseEntity<List<Task>> readAllTasks(Pageable page) {
         logger.info("Custom pageable");
         return ResponseEntity.ok(repository.findAll(page).getContent());
     }
+
     @GetMapping(path = "/{id}")
     ResponseEntity<Task> readTask(@PathVariable int id) {
         logger.info("finding task by id");
@@ -40,7 +44,7 @@ class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping( path ="/{id}")
+    @PutMapping(path = "/{id}")
     ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody @Valid Task toUpdate) {
         logger.info("Got request to updateTask");
         if (!repository.existsById(id)) {
@@ -54,7 +58,9 @@ class TaskController {
 
         return ResponseEntity.noContent().build();
     }
-    @PatchMapping( path ="/{id}")
+
+    @Transactional
+    @PatchMapping(path = "/{id}")
     public ResponseEntity<?> toggleTask(@PathVariable int id) {
         logger.info("Got request to toggleTask");
         if (!repository.existsById(id)) {
@@ -63,11 +69,13 @@ class TaskController {
         repository.findById(id).
                 ifPresent(t -> {
                     t.setDone(!t.getDone());
-                    repository.save(t);
+                    //repository.save(t);      @Transactional does it, makes method all or nothing,
+                    //                         if we get error after setting done it rolls it back.
                 });
 
         return ResponseEntity.noContent().build();
     }
+
     @PostMapping
     ResponseEntity<Task> addTask(@RequestBody @Valid Task task) {
         logger.info("Got request to addTask");

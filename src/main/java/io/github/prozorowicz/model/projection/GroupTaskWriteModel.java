@@ -1,6 +1,7 @@
 package io.github.prozorowicz.model.projection;
 
 import io.github.prozorowicz.model.Task;
+import io.github.prozorowicz.model.TaskGroup;
 
 import java.time.LocalDateTime;
 
@@ -24,8 +25,8 @@ public class GroupTaskWriteModel {
         this.deadline = deadline;
     }
 
-    public Task toTask() {
-        return new Task(description, deadline);
+    public Task toTask(final TaskGroup group) {
+        return new Task(description, deadline,group);
     }
 
 }

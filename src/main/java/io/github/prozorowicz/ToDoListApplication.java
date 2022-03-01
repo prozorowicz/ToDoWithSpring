@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.validation.Validator;
-@ConfigurationPropertiesScan
+@ConfigurationPropertiesScan //used by infoController
 @SpringBootApplication
 public class ToDoListApplication {
 
