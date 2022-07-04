@@ -5,6 +5,7 @@ import io.github.prozorowicz.model.*;
 import io.github.prozorowicz.model.projection.GroupReadModel;
 import io.github.prozorowicz.model.projection.GroupTaskWriteModel;
 import io.github.prozorowicz.model.projection.GroupWriteModel;
+import io.github.prozorowicz.model.projection.ProjectWriteModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,10 +14,10 @@ import java.util.stream.Collectors;
 public class ProjectService {
     private ProjectRepository repository;
     private TaskGroupRepository taskGroupRepository;
-    private TaskGroupService groupService;
+    private GroupService groupService;
     private TaskConfigurationProperties config;
 
-    ProjectService(final ProjectRepository repository, final TaskGroupRepository taskGroupRepository, final TaskGroupService groupService, final TaskConfigurationProperties config) {
+    ProjectService(final ProjectRepository repository, final TaskGroupRepository taskGroupRepository, final GroupService groupService, final TaskConfigurationProperties config) {
         this.repository = repository;
         this.taskGroupRepository = taskGroupRepository;
         this.groupService = groupService;
@@ -27,8 +28,8 @@ public class ProjectService {
         return repository.findAll();
     }
 
-    public Project createProject(final Project source) {
-        return repository.save(source);
+    public Project createProject(final ProjectWriteModel source) {
+        return repository.save(source.toProject());
     }
 
     public GroupReadModel createGroup(int projectId, LocalDateTime deadline) {
@@ -48,9 +49,9 @@ public class ProjectService {
                                 task.setDeadline(deadline.plusDays(step.getDaysToDeadline()));
                                 return task;
                             })
-                            .collect(Collectors.toSet())
+                            .collect(Collectors.toList())
                     );
-                    return groupService.createGroup(group);
+                    return groupService.createGroup(group,project);
                 }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
     }
 }

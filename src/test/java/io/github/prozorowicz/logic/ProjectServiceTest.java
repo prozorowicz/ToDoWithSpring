@@ -104,8 +104,8 @@ class ProjectServiceTest {
         assertThat(countBeforeCall + 1).isEqualTo(inMemoryGroupRepo.count());
     }
 
-    private TaskGroupService dummyGroupService(final InMemoryGroupRepository inMemoryGroupRepo) {
-        return new TaskGroupService(inMemoryGroupRepo, null);
+    private GroupService dummyGroupService(final InMemoryGroupRepository inMemoryGroupRepo) {
+        return new GroupService(inMemoryGroupRepo, null);
     }
 
     private Project projectWith(String projectDescription, Set<Integer> daysToDeadline) {

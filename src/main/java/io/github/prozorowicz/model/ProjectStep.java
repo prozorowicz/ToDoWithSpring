@@ -2,6 +2,7 @@ package io.github.prozorowicz.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "project_steps")
@@ -11,30 +12,29 @@ public class ProjectStep {
     private int id;
     @NotBlank(message = "task description must not be empty")
     private String description;
-    @NotBlank(message = "days to deadline must not be empty")
+    @NotNull(message = "days to deadline must not be empty")
     private int daysToDeadline;                                      // in ProjectService negative value of daysToDeadline is assumed
-    @NotBlank(message = "project step must be assigned to project")
     @ManyToOne(targetEntity = Project.class)
     @JoinColumn(name = "project_id")
     private Project project;
 
     @SuppressWarnings("unused")
-    ProjectStep() {
+    public ProjectStep() {
     }
 
     public int getDaysToDeadline() {
         return daysToDeadline;
     }
 
-    void setDaysToDeadline(final int days_to_deadline) {
-        this.daysToDeadline = days_to_deadline;
+    public void setDaysToDeadline(final int daysToDeadline) {
+        this.daysToDeadline = daysToDeadline;
     }
 
-    Project getProject() {
+    public Project getProject() {
         return project;
     }
 
-    void setProject(final Project project) {
+    public void setProject(final Project project) {
         this.project = project;
     }
 
@@ -50,7 +50,7 @@ public class ProjectStep {
         return description;
     }
 
-    void setDescription(final String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 }

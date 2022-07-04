@@ -1,5 +1,7 @@
 package io.github.prozorowicz.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -7,6 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "tasks")
 public class Task extends BaseTask{
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime deadline;
     @ManyToOne(targetEntity = TaskGroup.class)
     @JoinColumn(name = "task_group_id")

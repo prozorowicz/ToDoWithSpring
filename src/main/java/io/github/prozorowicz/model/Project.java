@@ -18,14 +18,14 @@ public class Project {
     private Set<ProjectStep> projectSteps;
 
     @SuppressWarnings("unused")
-    Project() {
+    public Project() {
     }
 
     public Set<ProjectStep> getProjectSteps() {
         return projectSteps;
     }
 
-    void setProjectSteps(final Set<ProjectStep> project_steps) {
+    public void setProjectSteps(final Set<ProjectStep> project_steps) {
         this.projectSteps = project_steps;
     }
 
@@ -50,7 +50,7 @@ public class Project {
         return description;
     }
 
-    void setDescription(final String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 }

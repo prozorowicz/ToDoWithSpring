@@ -6,5 +6,13 @@ spring:
   jpa:
     show-sql:  true
     hibernate.ddl-auto:  validate
-server.error.include-binding-errors:  always
+server:
+  error:
+    include-binding-errors: always
+    include-message: always
+management:
+  endpoints:
+    web:
+      exposure:
+        include=: '*'
 

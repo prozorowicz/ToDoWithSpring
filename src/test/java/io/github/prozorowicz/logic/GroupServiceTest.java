@@ -14,7 +14,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class TaskGroupServiceTest {
+class GroupServiceTest {
 
     @Test
     @DisplayName("should throw IllegalStateException when undone tasks exist")
@@ -22,7 +22,7 @@ class TaskGroupServiceTest {
         //given
         TaskRepository mockTaskRepository = taskRepositoryReturning(true);
         //system under test
-        var toTest = new TaskGroupService(null, mockTaskRepository);
+        var toTest = new GroupService(null, mockTaskRepository);
         //when
         var exception = catchThrowable(() -> toTest.toggleGroup(0));
         // then
@@ -40,7 +40,7 @@ class TaskGroupServiceTest {
         //and
         TaskRepository mockTaskRepository = taskRepositoryReturning(false);
         //system under test
-        var toTest = new TaskGroupService(mockRepository, mockTaskRepository);
+        var toTest = new GroupService(mockRepository, mockTaskRepository);
         //when
         var exception = catchThrowable(() -> toTest.toggleGroup(0));
         // then
@@ -62,7 +62,7 @@ class TaskGroupServiceTest {
         var mockRepository = mock(TaskGroupRepository.class);
         when(mockRepository.findById(anyInt())).thenReturn(Optional.of(group));
         //system under test
-        var toTest = new TaskGroupService(mockRepository, mockTaskRepository);
+        var toTest = new GroupService(mockRepository, mockTaskRepository);
         //when
         toTest.toggleGroup(group.getId());
         // then
